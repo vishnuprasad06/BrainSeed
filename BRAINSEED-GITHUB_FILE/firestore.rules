@@ -1,0 +1,51 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidUserProfile(data) {
+      return data.name is string && data.name.size() <= 100 &&
+             data.grade is string &&
+             data.language is string &&
+             data.interests is list &&
+             data.points is number &&
+             (!('email' in data) || data.email is string) &&
+             (!('currentStreak' in data) || data.currentStreak is number) &&
+             (!('lastLoginDate' in data) || data.lastLoginDate is string) &&
+             (!('activityLog' in data) || data.activityLog is list);
+    }
+
+    function isValidDiaryNote(data) {
+      return data.text is string && data.text.size() <= 5000 &&
+             data.parentUid == request.auth.uid &&
+             data.createdAt == request.time;
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidUserProfile(request.resource.data);
+      allow update: if isOwner(userId) && isValidUserProfile(request.resource.data) &&
+                    (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['name', 'email', 'grade', 'language', 'interests', 'points', 'currentStreak', 'lastLoginDate', 'activityLog']));
+    }
+
+    // Diary notes
+    match /seed_diary/{noteId} {
+      allow list: if isSignedIn() && resource.data.parentUid == request.auth.uid;
+      allow create: if isSignedIn() && isValidDiaryNote(request.resource.data);
+      allow delete: if isSignedIn() && resource.data.parentUid == request.auth.uid;
+    }
+  }
+}

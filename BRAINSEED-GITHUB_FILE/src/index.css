@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&family=Quicksand:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+
+  /* Natural Tones Palette */
+  --color-natural-bg: #FDFCF8;
+  --color-natural-text: #283618;
+  --color-natural-primary: #606C38;
+  --color-natural-sidebar: #FEFAE0;
+  --color-natural-border: #E9EDC9;
+  --color-natural-accent: #DDA15E;
+  --color-natural-accent-dark: #BC6C25;
+  --color-natural-muted: #F1F3E9;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-natural-bg text-natural-text;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display font-black;
+  }
+}
+
+.natural-card {
+  @apply bg-white rounded-[32px] border-2 border-natural-border shadow-sm;
+}
+
+.natural-card-heavy {
+  @apply bg-white rounded-[40px] border-4 border-natural-border shadow-sm;
+}
+
+.natural-button {
+  @apply bg-natural-primary text-white p-4 rounded-2xl font-bold transition-all active:scale-95;
+}
+
+.natural-input {
+  @apply bg-[#F9F7F0] border-2 border-natural-border rounded-2xl px-4 py-3 text-sm focus:outline-none transition-colors focus:border-natural-accent;
+}
