@@ -27,3 +27,8 @@ Frontend: React (Vite)
 AI: Google Gemini API (Antigravity, Google AI Studio)
 Database: Firebase (Auth, database)
 Repo: GitHub
+
+Key Innovation
+Explain Like I’m 5 (ELI5): Simplifies complex concepts into easy, story-based explanations that young students can understand quickly.
+Story-Based Learning: Uses AI to convert educational topics into engaging stories, improving retention and interest.
+Multilingual AI Support: Delivers explanations in multiple languages (English, Kannada, Hindi, Tamil) to make learning accessible for diverse students.
