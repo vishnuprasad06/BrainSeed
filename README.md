@@ -21,3 +21,9 @@ npm run dev
 
 6. Build for production
 npm run build
+
+Tech Stack
+Frontend: React (Vite)
+AI: Google Gemini API (Antigravity, Google AI Studio)
+Database: Firebase (Auth, database)
+Repo: GitHub
