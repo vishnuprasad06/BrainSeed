@@ -1,7 +1,7 @@
 Setup Instructions
 
 1. Clone the repository
-git clone https://github.com/your-username/brainseed.git
+git clone (https://github.com/vishnuprasad06/BrainSeed.git)
 cd brainseed/frontend
 
 3. Install dependencies
